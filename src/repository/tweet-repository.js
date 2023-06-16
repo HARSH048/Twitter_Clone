@@ -1,6 +1,10 @@
 const Tweet = require("../models/tweet");
+const crudRepository = require("./crud-repository");
 
-class TweetRepository {
+class TweetRepository extends crudRepository {
+  constructor() {
+    super(Tweet);
+  }
   async create(data) {
     try {
       const tweet = await Tweet.create(data);
@@ -29,6 +33,18 @@ class TweetRepository {
       console.log(error);
     }
   }
+
+  async getwithlikes(tweetId) {
+    try {
+      const tweet = await Tweet.findById(tweetId).populate({
+        path: "likes",
+      });
+      return tweet;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async destroy(tweetId) {
     try {
       const tweet = await Tweet.findByIdAndRemove(tweetId);
