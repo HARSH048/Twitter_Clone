@@ -22,7 +22,7 @@ app.listen(PORT, async () => {
   //   password: "363637",
   //   name: "komal",
   // });
-  const user = await userRepo.getAll();
-  await likeservice.toggleLike("648920565a163af69feed222", "Tweet", user[0].id);
-  await likeservice.toggleLike("648920565a163af69feed222", "Tweet", user[1].id);
+  // const user = await userRepo.getAll();
+  // await likeservice.toggleLike("648920565a163af69feed222", "Tweet", user[0].id);
+  // await likeservice.toggleLike("648920565a163af69feed222", "Tweet", user[1].id);
 });
