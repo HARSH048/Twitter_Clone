@@ -25,6 +25,15 @@ class TweetService {
     });
     return tweet;
   }
+
+  async get(tweetId) {
+    try {
+      const tweet = this.Tweetrepository.getwithcomment(tweetId);
+      return tweet;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = TweetService;

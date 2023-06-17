@@ -3,4 +3,5 @@ module.exports = {
   TweetRepository: require("./tweet-repository"),
   LikeRepository: require("./like-repository"),
   UserRepository: require("./user-repository"),
+  CommentRepository: require("./comment-repository"),
 };
