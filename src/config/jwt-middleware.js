@@ -6,20 +6,24 @@ const ExtractJwt = JWT.ExtractJwt;
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrkey: "twitter",
+  secretOrKey: "twitter",
 };
 
 const passportAuth = (passport) => {
-  passport.use(
-    new JwtStrategy(opts, async (jwt_payload, done) => {
-      const user = await User.findById(jwt_payload.id);
-      if (!user) {
-        done(null, false);
-      } else {
-        done(null, user);
-      }
-    })
-  );
+  try {
+    passport.use(
+      new JwtStrategy(opts, async (jwt_payload, done) => {
+        const user = await User.findById(jwt_payload.id);
+        if (!user) {
+          done(null, false);
+        } else {
+          done(null, user);
+        }
+      })
+    );
+  } catch (error) {
+    throw error;
+  }
 };
 
-module.exports = passportAuth;
+module.exports = { passportAuth };
