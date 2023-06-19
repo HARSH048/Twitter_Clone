@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -14,6 +15,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+});
+
+userSchema.pre("save", function (next) {
+  const user = this;
+  const SALT = bcrypt.genSaltSync(8);
+  const encyptedPassword = bcrypt.hashSync(user.password, SALT);
+  user.password = encyptedPassword;
+  next();
 });
 
 const User = mongoose.model("User", userSchema);

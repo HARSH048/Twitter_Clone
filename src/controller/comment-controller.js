@@ -10,7 +10,6 @@ const createComment = async (req, res) => {
       req.body.userId,
       req.body.content
     );
-    console.log(comment);
     return res.status(201).json({
       success: true,
       message: "successfully create the comment",
@@ -18,7 +17,7 @@ const createComment = async (req, res) => {
       data: comment,
     });
   } catch (error) {
-    return res.status(201).json({
+    return res.status(400).json({
       success: false,
       message: "something went wrong",
       err: error,
